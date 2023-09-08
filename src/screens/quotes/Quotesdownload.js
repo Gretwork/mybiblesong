@@ -6,10 +6,11 @@ import {
   Image,
   Linking,
   ScrollView,
-  TouchableOpacity,  AsyncStorage,
+  TouchableOpacity,  
   PermissionsAndroid,
   Platform, 
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useRoute} from '@react-navigation/native';
 //import RenderHtml from 'react-native-render-html';
 import {globalstyles} from '../../styles/GlobalStyles';

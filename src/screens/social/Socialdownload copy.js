@@ -18,16 +18,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
-import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
+import ImageZoomEffect from '../../components/ImageZoomEffect';
 
-function SongDetail({props, navigation, onPress}) {
+function Socialdownload({props, navigation, onPress}) {
   const route = useRoute();
   const ViewShotRef = useRef();
   const [extrathings, setExtrathings] = useState(true);
 
   let imageURI = route.params.songImgUrl;
   let imageURIMessage =
-    'Download My Bible Song App or Visit our Website www.mybiblesong.com';
+    'Download MyBibleSong App or Visit our Website www.mybiblesong.com';
   let imageURITitle = route.params.posttitle;
   function captureViewShot() {
     
@@ -60,6 +60,7 @@ function SongDetail({props, navigation, onPress}) {
   }
 
   let dirs = RNFetchBlob.fs.dirs;
+  
   function downloadImage() {
     let date = new date();
     let image_url = route.params.songImgUrl;
@@ -129,18 +130,12 @@ function SongDetail({props, navigation, onPress}) {
                 result: 'base64',
               }}>
               <View style={globalstyles.SongDetailImageCon}>
-                {/* <Image  source={{uri: route.params.songImgUrl}}
-                  //style={{ width:'96%', minHeight:400 }}
-                  //resizeMode="contain"
-                  style={globalstyles.SongDetailImage}
-                /> */}
-                <ReactNativeZoomableView   maxZoom={30} contentWidth={300} contentHeight={150}>
-                  <Image
-                    //style={globalstyles.SongDetailImage}
-                    style={{ width: '100%', height: '100%', resizeMode: 'contain' }}
-                    source={{uri: route.params.songImgUrl}}
-                  />
-                </ReactNativeZoomableView>
+               
+                {/* <ImageZoom source={{uri: route.params.songImgUrl}}
+                    minScale={0.5} maxScale={3} renderLoader={() => <CustomLoader />}
+                    style={globalstyles.SongDetailImage}
+                    resizeMode="cover" /> */}
+                <ImageZoomEffect   imgurl={{uri: route.params.songImgUrl}}  styleclass={globalstyles.SongDetailImage} />
               </View>
             </ViewShot>
           </>
@@ -148,8 +143,8 @@ function SongDetail({props, navigation, onPress}) {
         {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
         <TouchableOpacity onPress={() => Linking.openURL(route.params.weburl)}>
         
-        <Text style={{flex:1, display:'flex', textAlign:'right', marginTop:10, marginRight:30, fontWeight:'600'}}>
-          For English <Icon name="ios-arrow-down-outline" style={{textAlign:'right', fontSize:20, color:'#333333', fontWeight:'600'}} />
+        <Text style={{flex:1, display:'flex', textAlign:'right', marginTop:10, marginRight:50, fontWeight:'600'}}>
+          For more <Icon name="ios-arrow-down-outline" style={{textAlign:'right', fontSize:20, color:'#333333', fontWeight:'600'}} />
         </Text>
         </TouchableOpacity>
         <View style={globalstyles.BtnConDetail1}>
@@ -177,53 +172,6 @@ function SongDetail({props, navigation, onPress}) {
             />
           </Text>
           </TouchableOpacity>
-          {route.params.videolink ? (
-            <>
-            <TouchableOpacity 
-                    onPress={() =>
-                    navigation.navigate('VideoPlayer', {
-                      id: route.params.id,
-                      posttitle: route.params.posttitle,
-                      videolink: route.params.videolink,
-                      audiolink: route.params.audiolink,
-                      songImgUrl: route.params.songImgUrl,
-                      weburl: route.params.weburl,
-                      postmetatitle: route.params.postmetatitle,
-                    })
-                  }>
-              <Text style={globalstyles.BtnConDetailText}>
-                <Icon
-                  name="ios-logo-youtube"
-                  style={globalstyles.BtnConDetailTextIcon}
-                />
-              </Text>
-              </TouchableOpacity>
-            </>
-          ) : (
-            
-            <>
-            <TouchableOpacity 
-            onPress={() =>
-              navigation.navigate('VideoPlayer', {
-                id: route.params.id,
-                posttitle: route.params.posttitle,
-                videolink: 'https://youtube.com/playlist?list=PLx4yi-Lyn3xhjD0NfMR4aW0_0H5KPKhC1',
-                audiolink: route.params.audiolink,
-                songImgUrl: route.params.songImgUrl,
-                weburl: route.params.weburl,
-                postmetatitle: route.params.postmetatitle,
-              })
-            }>
-              <Text style={globalstyles.BtnConDetailText}>
-                <Icon
-                  name="ios-logo-youtube"
-                  style={globalstyles.BtnConDetailTextIcon}
-                  
-                />
-              </Text>
-              </TouchableOpacity>
-            </>
-          )}
           {route.params.weburl ? (
             <>
             <TouchableOpacity onPress={() => Linking.openURL(route.params.weburl)}>
@@ -237,7 +185,7 @@ function SongDetail({props, navigation, onPress}) {
             </>
           ) : (
             <>
-            <TouchableOpacity onPress={() => Linking.openURL('https://www.mybiblesong.com/home')}>
+            <TouchableOpacity onPress={() => Linking.openURL('https://www.mybiblesong.com/quotes')}>
               <Text style={globalstyles.BtnConDetailText}>
                 <Icon
                   name="ios-globe-outline"
@@ -263,4 +211,4 @@ function SongDetail({props, navigation, onPress}) {
   );
 }
 
-export default SongDetail;
+export default Socialdownload;

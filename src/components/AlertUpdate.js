@@ -11,7 +11,7 @@ const AlertUpdate = () => {
         try {
            const list = [];
            //console.log("Break");
-           firestore().collection("alertupdate").get()
+           firestore().collection("alertupdateios").get()
            .then(function(querySnapshot){
               querySnapshot.forEach(function(doc){
                  list.push(doc.data());

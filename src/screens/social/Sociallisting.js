@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { RadioButton } from 'react-native-paper';
 import BtnRadioBtn from '../../components/BtnRadioButton';
 import {useRoute} from '@react-navigation/native';
-import { ImageZoom } from '@likashefqet/react-native-image-zoom';
+//import { ImageZoom } from '@likashefqet/react-native-image-zoom';
 import ImageZoomEffect from '../../components/ImageZoomEffect';
 
 function Sociallisting({props, navigation}) {
@@ -184,7 +184,8 @@ function Sociallisting({props, navigation}) {
                               //   }
                               // />*/}
                              
-                           <ImageZoomEffect   imgurl={{uri: item.songdata.biblequotesimage}}  styleclass={(globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone)} />
+                              <ImageZoomEffect   imgurl={{uri: item.songdata.biblequotesimage}}  
+                              styleclass={(globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone)} />
 
                               {/* <Text style={( globalstyles.Downloadimgbtn)}>Download</Text> */}
                               <View style={globalstyles.Downloadimgbtn}>

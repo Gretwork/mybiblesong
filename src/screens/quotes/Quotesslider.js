@@ -1,10 +1,11 @@
-import { Button, View,  Text,  Image,  FlatList, AsyncStorage, TouchableOpacity } from 'react-native';
+import { Button, View,  Text,  Image,  FlatList, TouchableOpacity } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {globalstyles} from '../../styles/GlobalStyles';
 import firestore from '@react-native-firebase/firestore';
 import Loader from '../../components/Loader';
 import { Linking } from 'react-native';
-//import {AsyncStorage} from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 function Quotesslider({props, navigation}) {

@@ -1,4 +1,4 @@
-import React, {Component, useRef, useState} from 'react';
+import React, {Component, useRef, useState,} from 'react';
 import {
   Button,
   View,
@@ -9,7 +9,9 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
   Platform,
+  Alert,
 } from 'react-native';
+import { CameraRoll, useCameraRoll } from "@react-native-camera-roll/camera-roll";
 import {useRoute} from '@react-navigation/native';
 //import RenderHtml from 'react-native-render-html';
 import {globalstyles} from '../../styles/GlobalStyles';
@@ -18,18 +20,29 @@ import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
 import ImageZoomEffect from '../../components/ImageZoomEffect';
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
+
+import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+
+
+
+
+import {downloadFile, getDownloadPermissionAndroid} from '../../functiondownloadimg/Index';
+
 
 function Socialdownload({props, navigation, onPress}) {
   const route = useRoute();
   const ViewShotRef = useRef();
   const [extrathings, setExtrathings] = useState(true);
 
+  //New function start below
+  //New function end here
   let imageURI = route.params.songImgUrl;
-  let imageURIMessage =
-    'Download MyBibleSong App or Visit our Website www.mybiblesong.com';
+  let imageURIMessage = 'Download MyBibleSong App or Visit our Website www.mybiblesong.com';
   let imageURITitle = route.params.posttitle;
+  
+  
   function captureViewShot() {
-    
     //setExtrathings(false);
     //setExtrathings(true);
     let imagePath = null;
@@ -47,8 +60,9 @@ function Socialdownload({props, navigation, onPress}) {
         var base64Data = `data:image/png;base64,` + base64Data;
         // here's base64 encoded image
         await Share.open({
-          title: imageURITitle,
-          message: imageURIMessage,
+    //title: imageURITitle,
+    //message: imageURIMessage,
+    //message:'Download MyBibleSong App or Visit our Website www.mybiblesong.com',
           url: base64Data,
         });
         // remove the file from storage
@@ -59,6 +73,7 @@ function Socialdownload({props, navigation, onPress}) {
   }
 
   let dirs = RNFetchBlob.fs.dirs;
+
   function downloadImage() {
     let date = new date();
     let image_url = route.params.songImgUrl;
@@ -87,8 +102,8 @@ function Socialdownload({props, navigation, onPress}) {
       ? dirs['MainBundleDir'] + imageName
       : dirs.PictureDir + imageName;
 
-  function downloadImage() {
-    if (Platform.OS == 'ios') {
+  function downloadImageNew() {
+    if (Platform.OS == 'android') {
       RNFetchBlob.config({
         fileCache: true,
         appendExt: 'png',
@@ -107,9 +122,16 @@ function Socialdownload({props, navigation, onPress}) {
           //console.log(res, 'end downloaded')
         });
     } else {
-      CameraRoll.saveToCameraRoll(imgUrl);
+      //CameraRoll.save(imgUrl);
+      //CameraRoll.save(imgUrl)
+      CameraRoll.save(imgUrl);
+      //console.log('ios - downloded is -', imgUrl);
+      ///Alert('Done')
+      Alert.alert("Downloded in media gallery.");
+
     }
   }
+
 
   return (
     <ScrollView>
@@ -132,8 +154,15 @@ function Socialdownload({props, navigation, onPress}) {
                 {/* <ImageZoom source={{uri: route.params.songImgUrl}}
                     minScale={0.5} maxScale={3} renderLoader={() => <CustomLoader />}
                     style={globalstyles.SongDetailImage}
-                    resizeMode="cover" /> */}
-                <ImageZoomEffect   imgurl={{uri: route.params.songImgUrl}}  styleclass={globalstyles.SongDetailImage} />
+                    resizeMode="cover" /> 
+                <ImageZoomEffect   imgurl={{uri: route.params.songImgUrl}}  styleclass={globalstyles.SongDetailImage} />*/}
+                <ReactNativeZoomableView   maxZoom={30} contentWidth={300} contentHeight={150}>
+                  <Image
+                    //style={globalstyles.SongDetailImage}
+                    style={{ width: '100%', height: '100%', resizeMode: 'contain' }}
+                    source={{uri: route.params.songImgUrl}}
+                  />
+                </ReactNativeZoomableView>
               </View>
             </ViewShot>
           </>
@@ -154,7 +183,8 @@ function Socialdownload({props, navigation, onPress}) {
             <Icon name="ios-heart" style={globalstyles.BtnConDetailTextIcon} />
           </Text> */}
           
-          <TouchableOpacity onPress={downloadImage}>
+          <TouchableOpacity 
+          onPress={downloadImageNew} >
           <Text style={globalstyles.BtnConDetailText}>
             <Icon
               name="ios-download-outline"

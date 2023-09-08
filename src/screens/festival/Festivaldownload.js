@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import {useRoute} from '@react-navigation/native';
+import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 //import RenderHtml from 'react-native-render-html';
 import {globalstyles} from '../../styles/GlobalStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -106,7 +107,7 @@ function Festivaldownload({props, navigation, onPress}) {
           //console.log(res, 'end downloaded')
         });
     } else {
-      CameraRoll.saveToCameraRoll(imgUrl);
+      CameraRoll.save(imgUrl);
     }
   }
 

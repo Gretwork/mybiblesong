@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { RadioButton } from 'react-native-paper';
 import BtnRadioBtn from '../../components/BtnRadioButton';
 import {useRoute} from '@react-navigation/native';
+import ImageZoomEffect from '../../components/ImageZoomEffect';
 
 function Vanchanlisting({props, navigation}) {
   const route = useRoute();
@@ -164,19 +165,21 @@ function Vanchanlisting({props, navigation}) {
                       postmetatitle: item.songdata.postmetatitle,
                     })
                   }>
-                  <View >
+                  <View style={globalstyles.HorScrollMainCon}>
                     <View key={item.songdata.id}>
                       <View >
                         {item.songdata.songImgUrl ? (
                           <>
-                            <View>
+                            {/* <View style={globalstyles.HorSpaceLeft15}>
                               <Image
                                 source={{uri: item.songdata.songImgUrl}}
-                                style={
-                                  (globalstyles.HorScrollBoxBibleVersImgInn,
-                                  globalstyles.ImageBottomBorderNone)
-                                }
-                              />
+                                style={ (globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone) }
+                              />                              
+                            </View> */}
+                            <View style={globalstyles.HorSpaceLeft15}>                             
+                              <ImageZoomEffect   imgurl={{uri: item.songdata.songImgUrl}} 
+                              styleclass={(globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone)} />
+
                               {/* <Text style={( globalstyles.Downloadimgbtn)}>Download</Text> */}
                               <View style={globalstyles.Downloadimgbtn}>
                                 <View style={globalstyles.BtnConDetail1}>

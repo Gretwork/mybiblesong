@@ -1,6 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {useRoute} from '@react-navigation/native';
