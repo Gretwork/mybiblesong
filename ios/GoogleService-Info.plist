@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>795800452683-8tc3voepuamrqs1v62ifq8jrdq7gdjd5.apps.googleusercontent.com</string>
+	<string>795800452683-16cr36og06begtcsomtjkeavikb67tc2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.795800452683-8tc3voepuamrqs1v62ifq8jrdq7gdjd5</string>
+	<string>com.googleusercontent.apps.795800452683-16cr36og06begtcsomtjkeavikb67tc2</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>795800452683-dd6rom4he82pj13encovd686v8ud9e3c.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mybiblesongios</string>
+	<string>com.mybiblesong</string>
 	<key>PROJECT_ID</key>
 	<string>gaogeet</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:795800452683:ios:02a5f57e35c8c9f71dd7ce</string>
+	<string>1:795800452683:ios:9037fc657109b6111dd7ce</string>
 </dict>
 </plist>
