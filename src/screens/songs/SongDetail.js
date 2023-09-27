@@ -8,7 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   PermissionsAndroid,
-  Platform,
+  Platform,  Alert,
 } from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
@@ -109,6 +109,7 @@ function SongDetail({props, navigation, onPress}) {
         });
     } else {
       CameraRoll.save(imgUrl);
+      Alert.alert("Downloded in media gallery.");
     }
   }
 
