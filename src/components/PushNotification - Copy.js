@@ -38,7 +38,7 @@ export const pushMessageListener = async (navigation) => {
     //const navigate = useNavigation();
 
 const clickme = () =>{
-    navigation.navigate('Home');
+    navigation.navigate('Songtab');
 }
 
     messaging().onNotificationOpenedApp(remoteMessage => {

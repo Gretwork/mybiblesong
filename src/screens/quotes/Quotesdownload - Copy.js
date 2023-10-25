@@ -144,7 +144,7 @@ function Quotesdownload({props, navigation, onPress}) {
               </View>
             </ViewShot>
            
-        {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
+        {/* <Button title="Home" onPress={() => navigation.navigate('Songtab')} /> */}
         <TouchableOpacity onPress={() => Linking.openURL(route.params.weburl)}>
         
         <Text style={{flex:1, display:'flex', textAlign:'right', marginTop:10, marginRight:70, fontWeight:'600'}}>
@@ -191,7 +191,7 @@ function Quotesdownload({props, navigation, onPress}) {
           <Text
             style={globalstyles.BtnLoadMoreInnText}
             //onClick={showMoreItems}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('Songtab')}>
             Back to Home ...
           </Text>
         </View>

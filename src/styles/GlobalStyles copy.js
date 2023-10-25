@@ -2,6 +2,9 @@ import {StyleSheet,Dimensions } from 'react-native'
 import {windowHeight, windowWidth} from './Dimentions'
 import { pink100 } from 'react-native-paper/lib/typescript/styles/colors';
 
+
+
+
 const dimensions = Dimensions.get('window');
 
 export const globalstyles = StyleSheet.create({
@@ -57,13 +60,13 @@ export const globalstyles = StyleSheet.create({
     resizeMode:'cover'
   },
   HorScrollBoxBibleVersImg:{
-    marginRight:20, marginBottom:0, borderRadius:10, width: windowWidth / 1.078, 
+    marginRight:20, marginBottom:0, borderRadius:10, width: windowWidth / 1.030, 
     height:Math.round(dimensions.width * 9/16 ),
     resizeMode:'cover'
   },
   HorScrollBoxBibleVersImgInn:{
     marginRight:0, marginBottom:0, borderRadius:10, 
-    width: windowWidth / 1.078, 
+    width: windowWidth / 1.030, 
     //width:dimensions.width-130,
     //height:Math.round(dimensions.width * 9/16 ), 
     resizeMode:'contain',
@@ -84,9 +87,9 @@ export const globalstyles = StyleSheet.create({
   
   WebviewYouTubeSmall:{ 
     /*display:'flex', alignItems:'center',  justifyContent:'center', overflow:'hidden',
-    width: windowWidth / 1.078, margin:10, resizeMode:'contain', aspectRatio:5/3, borderRadius:10,
+    width: windowWidth / 1.030, margin:10, resizeMode:'contain', aspectRatio:5/3, borderRadius:10,
     */
-    marginLeft:10, marginVertical:10, width: windowWidth / 1.020, 
+    marginLeft:10, marginVertical:10, width: windowWidth / 1.058, 
     //height: windowHeight /3.2, 
     //height:Math.round(dimensions.width * 9/16 ), 
     aspectRatio:5/3,
@@ -95,20 +98,20 @@ export const globalstyles = StyleSheet.create({
    
   },
   WebviewYouTubeCover:{  
-    position:'absolute', top:10, bottom:10, width: windowWidth / 1.078, backgroundColor:'black', zIndex:1,  opacity:0.5,
+    position:'absolute', top:10, bottom:10, width: windowWidth / 1.030, backgroundColor:'black', zIndex:1,  opacity:0.5,
     display:'flex',   justifyContent:'center', 
   },
   WebviewYouTubeCoverIcon:{  
      color:'red', fontSize:'28',
   },
   WebviewVideoHor1:{ padding:10, marginTop:20, marginBottom:20,
-    width: windowWidth / 1.078, height: windowHeight / 3.2, backgroundColor:'white',
+    width: windowWidth / 1.030, height: windowHeight / 3.2, backgroundColor:'white',
   },
   WebviewFullHeight:{ padding:10, marginTop:20, marginBottom:20,
-    width: windowWidth / 1.078, minHeight:1500, backgroundColor:'white',
+    width: windowWidth / 1.030, minHeight:1500, backgroundColor:'white',
   },
   WebviewFullHeightQuiz:{ padding:10, marginTop:20, marginBottom:20,
-    width: windowWidth / 1.078, minHeight:1500, backgroundColor:'white',
+    width: windowWidth / 1.030, minHeight:1500, backgroundColor:'white',
   },
   WebviewVideoHorInn:{
     width: windowWidth / 1.2, height: windowHeight / 3.2, 
@@ -193,10 +196,10 @@ export const globalstyles = StyleSheet.create({
       width: windowWidth /1, height: windowHeight /2,    resizeMode:'cover',
   },
   SongDetailImageCon:{
-    width: windowWidth/1.078, height: windowHeight/1.4, backgroundColor:'white'
+    width: windowWidth/1.030, height: windowHeight/1.4, backgroundColor:'white'
   },
   SongDetailImage:{
-     width: windowWidth /1.078,
+     width: windowWidth /1.030,
      //height: windowHeight /1.4, 
      resizeMode:'contain', 
   },
@@ -204,7 +207,7 @@ export const globalstyles = StyleSheet.create({
     position:'relative', height:65, marginTop:5, marginBottom:10,   width:windowWidth,
     borderBottomColor:'#cdcdcd', borderBottomWidth:2, borderStyle:'solid',  
   },
-  ImageZoomMainCon:{width: windowWidth /1.078,},
+  ImageZoomMainCon:{width: windowWidth /1.030,},
   BorderGray:{borderWidth:1, borderStyle:'solid', borderColor:'#d5d8d9',},
   QuoteListingMainCon:{
     display:'flex', padding:15, backgroundColor:'#fff', textAlign:'center', alignItems:'center',
@@ -285,7 +288,7 @@ export const globalstyles = StyleSheet.create({
   BtnConDetail1:{
     display:'flex', justifyContent:'space-around', alignItems:'center', textAlign:'center',
     flexDirection:'row',   textAlign:'center', 
-    width:windowWidth/1.078, paddingTop:20, paddingBottom:20,
+    width:windowWidth/1.030, paddingTop:20, paddingBottom:20,
   },
   BtnConDetailSmall:{ paddingTop:10, paddingBottom:10},
   BtnConDetailText:{
@@ -339,34 +342,34 @@ export const globalstyles = StyleSheet.create({
     paddingVertical:50,
   },
   FilterRadiolblCon:{ 
-    paddingBottom:20,  marginBottom:20, marginTop:10, marginLeft:10, paddingTop:0, paddingBottom:0,
+    paddingBottom:20,  marginBottom:20, marginTop:20, marginLeft:10, paddingTop:0, paddingBottom:0,
   borderBottomLeftRadius:4, borderBottomRightRadius:4, color:'#fff', textTransform:'uppercase',
   display:'flex',justifyContent:'space-around', alignItems:'center', textAlign:'center',  overflow:'scroll',
   flexDirection:'row',   textAlign:'center', flexWrap:'nowrap', 
-  width:windowWidth/1.078,
+  width:windowWidth/1.030,
   },
   FilterRadiolbl:{ paddingHorizontal:5,   paddingVertical:4, backgroundColor:'#fff',
     borderRadius: 4,  marginRight:10,  borderRadius:5,},
 
   ImageBottomBorderNone: { marginRight:20, marginBottom:0, borderRadius:10, 
-    width: windowWidth / 1.078,  resizeMode:'contain',
+    width: windowWidth / 1.030,  resizeMode:'contain',
     aspectRatio:3/3, borderBottomLeftRadius:0, borderBottomRightRadius:0},
   Downloadimgbtn:{ backgroundColor:'#333', marginTop:-1, zIndex:-1, padding:15, marginBottom:20,
   borderBottomLeftRadius:4, borderBottomRightRadius:4, color:'#fff', textTransform:'uppercase',
   display:'flex', justifyContent:'space-around', alignItems:'center', textAlign:'center',
   flexDirection:'row',   textAlign:'center',  
-  width:windowWidth/1.078, paddingTop:0, paddingBottom:0, 
+  width:windowWidth/1.030, paddingTop:0, paddingBottom:0, 
 },
 DownloadimgbtnWhite:{ backgroundColor:'#fff', marginTop:-1, zIndex:-1, padding:15, marginBottom:20,
   borderBottomLeftRadius:4, borderBottomRightRadius:4, color:'#fff', textTransform:'uppercase',
   display:'flex', justifyContent:'space-around', alignItems:'center', textAlign:'center',
   flexDirection:'row',   textAlign:'center',  
-  width:windowWidth/1.078, paddingTop:0, paddingBottom:0, 
+  width:windowWidth/1.030, paddingTop:0, paddingBottom:0, 
 },
 DownloadimgbtnSmall:{ backgroundColor:'#333', marginTop:-2, zIndex:-1, padding:5, marginBottom:0,
 borderBottomLeftRadius:4, borderBottomRightRadius:4, color:'#fff', textTransform:'uppercase',
 display:'flex', justifyContent:'space-around', alignItems:'center', textAlign:'center',
-flexDirection:'row',   textAlign:'center',  width:windowWidth/1.003, paddingTop:0, paddingBottom:0, 
+flexDirection:'row',   textAlign:'center',  width:windowWidth/1.030, paddingTop:0, paddingBottom:0, 
 },
 DownloadimgbtnColor:{ backgroundColor:'#f5f5f5'},
   BtnComingSoon:{ fontSize:16, color:'#333333', fontStyle:'italic', fontWeight:'400'},
@@ -443,7 +446,7 @@ DownloadimgbtnColor:{ backgroundColor:'#f5f5f5'},
     color:'#333333',
   }, 
   LogoTextHeaderLeft:{
-    fontSize:26, color:'red', fontWeight:'600', marginLeft:8,
+    fontSize:26, color:'red', fontWeight:'600', marginLeft:5,
   },
   UserTopimg: {
     height: 40,
@@ -454,7 +457,7 @@ DownloadimgbtnColor:{ backgroundColor:'#f5f5f5'},
   HeaderConMain: {
     display: 'flex',
     marginBottom:0,
-    marginTop:0, padding:10,
+    marginTop:20, padding:10,
     backgroundColor: '#ffffff',
     flexDirection: 'row', borderBottomColor:'#cdcdcd', borderBottomWidth:1, borderStyle:'solid',
   },

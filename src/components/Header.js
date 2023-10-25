@@ -5,14 +5,17 @@ import {globalstyles} from '../styles/GlobalStyles';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
 import Icons from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 
 //export class Header extends Component {
   function Header  (props)  {
+    const insets = useSafeAreaInsets();
   //render() {
     const navigation = useNavigation();
     return (
-      <>
+      <View style={{ paddingTop: insets.top, }} >
       <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('Appinfo')
@@ -23,7 +26,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
         <Logourlone /> 
       </View>
                   </TouchableOpacity>
-      </>
+      </View>
       
     );
   }

@@ -5,6 +5,7 @@ import Homescreen from '../screens/Homescreen';
 import Settingsscreen from '../screens/users/Settingsscreen';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Musicplayer from '../screens/music/Musicplayer';
+import Shoppinglisting from '../screens/shopping/Shoppinglisting';
 import Header from '../components/Header';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -66,6 +67,16 @@ const NavBottomTab = () => {
               ),
             }}
           /> 
+          <Tab.Screen
+            name="Shop"
+            component={Shoppinglisting}
+            options={{
+              tabBarLabel: 'Now',
+              tabBarIcon: ({color}) => (
+                <Icon name="ios-cart-outline" color={color} size={26} />  
+              ),
+            }}
+          />
           <Tab.Screen
             name="Settings"
             component={Settingsscreen}

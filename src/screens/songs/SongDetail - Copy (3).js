@@ -126,12 +126,12 @@ function downloadImage () {
             </ViewShot>
           </>
         ) : null}
-        {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
+        {/* <Button title="Home" onPress={() => navigation.navigate('Songtab')} /> */}
         <View style={(globalstyles.TextCenter, globalstyles.BtnLoadMoreOutCon)}>
           <Text
             style={globalstyles.BtnLoadMoreInnText}
             //onClick={showMoreItems}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('Songtab')}>
             Back to Home ...
           </Text>
         </View>

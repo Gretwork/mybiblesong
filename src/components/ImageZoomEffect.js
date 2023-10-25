@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
-import {windowHeight, windowWidth} from '../styles/Dimentions';
+//import {View, TextInput, StyleSheet} from 'react-native';
+//import {windowHeight, windowWidth} from '../styles/Dimentions';
 import { ImageZoom } from '@likashefqet/react-native-image-zoom';
 import Loader from '../components/Loader'
 

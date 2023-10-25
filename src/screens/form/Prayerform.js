@@ -1,395 +1,283 @@
 import React, {useState, useEffect, useNavigate} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {View, Text, TextInput, StyleSheet, ScrollView, Keyboard,TouchableOpacity, Button, Alert, } from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import FormInput from '../../components/FormInput';
-import FormButton from '../../components/FormButton';
 import {globalstyles} from '../../styles/GlobalStyles';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import Loader from '../../components/Loader';
 
-const Prayerform = ({props, navigation}) => {
+
+
+const Prayerform = ({props, navigation, buttonTitle, ...rest}) => {
+ 
+   // State variables to store form inputs,  
+  // errors, and form validity 
+    //const [Email, setEmail] = useState(''); 
+    const [errors, setErrors] = useState(''); 
+    const [isFormValid, setIsFormValid] = useState(false); 
+  
+    
   //const navigate = useNavigate();
   const route = useRoute();
   const [loading, setLoading] = useState(false);
-  const [Email, setEmail] = useState();
+  const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('123456');
   const [FullName, setFullName] = useState('');
-  const [Fname, setFname] = useState();
-  const [Lname, setLname] = useState();
   const [Mobile, setMobile] = useState();
   const [City, setCity] = useState();
   const [State, setState] = useState();
   const [Country, setCountry] = useState();
   const [Message, setMessage] = useState();
   const [errorMessage, setErrorMessage] = useState(null);
+  const [errortext, setErrortext] = useState("");
+  const [Successtext, setSuccesstext] = useState("");
+  
+  const formSubmitFunction = () => {
+    setErrortext("");
+    //if (!FullName) return alert("Please fill Name");
+    //if (!Email) return alert("Please fill Email");
 
-  const submitform = async (
-    Email,
-    Password,
-    FullName,
-    Fname,
-    Lname,
-    Mobile,
-    City,
-    State,
-    Country,
-    Message,
-  ) => {
-    try {
-      await auth()
-        .createUserWithEmailAndPassword(
+    auth()
+      .createUserWithEmailAndPassword(
           Email,
           Password,
           FullName,
-          Fname,
-          Lname,
           Mobile,
           City,
           State,
           Country,
           Message,
-        ) 
-        //alert('Please check your Email for verification link.')
-        .then(() => {
-          //Once the user creation has happened successfully, we can add the currentUser into firestore
-          //with the appropriate details.
-          firestore()
-            .collection('formprayerreq')
+      )
+      .then(() => {
+        firestore()
+            .collection('formprayer')
             .doc(auth().currentUser.uid)
             .set({
               FullName:FullName,
-              Fname: Fname,
-              Lname: Lname,
               Email: Email,
               Mobile: Mobile,
               City: City,
               State: State,
               Country: Country,
               Message: Message,
+              Password:Password,
               createdAt: firestore.Timestamp.fromDate(new Date()),
               userImg: null,
             })
-
-            //ensure we catch any errors at this stage to advise us if something does go wrong
-            .catch(error => {
-              //console.log('Something went wrong with added user to firestore: ', error);
-            });
-        })
-        //we need to catch the whole sign up process if it fails too.
-        .catch(error => {
-          //console.log('Something went wrong with sign up: ', error);
-        });
-    } catch (e) {
-      setErrorMessage(e.code);
-      //console.log('code 1',e.message);
-      //console.log('code 2',e.code);
-      //alert(e.code)
-      //alert( e.message)
-    }
-    //await auth().signOut()
-    //props.push('/Home')
-    setTimeout(() => {
-      navigation.navigate('Home');
-    }, 2000);
-
-    setErrorMessage('Thank you for your email, We will get back to your soon.');
+        //console.log("Registration Successful. Please Login to proceed");
+        setErrortext(null);
+        setSuccesstext("Thank you for your email, We will get back to your soon.");
+        setTimeout(() => { navigation.navigate('Shop'); }, 2000);
+      })
+      .catch((error) => {
+        //console.log(error);
+        if (error.code === "auth/email-already-in-use") {
+          setSuccesstext(null)
+          setErrortext("That email address is already in use!");
+        } else {
+          setErrortext(error.message);
+        }
+      });
   };
 
-  // Form validation new
+    useEffect(() => { 
+        // Trigger form validation when FullName,  
+        // Email, or Password changes 
+        validateForm(); 
+    }, [FullName, Email, Mobile, City, State, Country, Message, Password]); 
   
-  // New validation
-  const initialValues = {
-    FullName: '',
-    Fname: '',
-    Lname: '',
-    Email: '',
-    Mobile: '',
-    City: '',
-    State: '',
-    Country: '',
-    Message: '',
-  };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+    const validateForm = () => { 
+        let errors = {}; 
+        if (!FullName) { 
+          errors.FullName = 'Full Name is required.'; 
+        } else if (FullName.length < 4) { 
+            errors.FullName = 'Full Name required.'; 
+        }
+        // Validate Email field 
+        if (!Email) { 
+            errors.Email = 'Email is required.'; 
+        } else if (!/\S+@\S+\.\S+/.test(Email)) { 
+            errors.Email = 'Email is invalid.'; 
+        } 
+        if (!Mobile) { 
+          errors.Mobile = 'Mobile is required.'; 
+      } else if (!/^([+]\d{2})?\d{7,15}$/.test(Mobile)) { 
+          errors.Mobile = 'Mobile is invalid.'; 
+      } 
+        if (!City) { 
+          errors.City = 'City is required.'; 
+        } 
+        if (!State) { 
+          errors.State = 'State is required.'; 
+        } 
+        if (!Country) { 
+          errors.Country = 'Country is required.'; 
+        } 
+        if (!Message) { 
+          errors.Password = 'Message is required.'; 
+        } else if (Message.length < 20) { 
+            errors.Message = 'Message required minimum length of 20 words.'; 
+        }
+      
+        // Set the errors and update form validity 
+        setErrors(errors); 
+        setIsFormValid(Object.keys(errors).length === 0); 
+    }; 
+  
+    const handleSubmit = () => { 
+        if (isFormValid) { 
+            // Form is valid, perform the submission logic 
+            formSubmitFunction();
+            //Alert.alert("Form submitted successfully!");
+            //console.log('Form submitted successfully!'); 
+        } else { 
+            // Form is invalid, display error messages 
+            //console.log('Form has errors. Please correct them.'); 
+        } 
+    }; 
 
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setFormValues({...formValues, [name]: value});
-    //console.log('Form value is', formValues)
-  };
-  //  New validation function
-  const handleSubmit = e => {
-    //e.preventDefault()
-    setFormErrors(validate(formValues));
-    //setIsSubmit(true)
-    //alert('form checking 11');
-  };
-
-  useEffect(() => {
-    //console.log(formErrors)
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      //console.log(formValues)
-      submitform()
-      //alert('form checking');
-    }
-  }, [formErrors]);
-
-  const validate = values => {
-    const FormValErrors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    const regexm = /^([+]\d{2})?\d{8,10}$/;
-    if (!values.FullName) {
-      FormValErrors.FullName = 'Full Name is required!';
-    }
-    if (!values.CountryCode) {
-      FormValErrors.CountryCode = 'Select Country Code';
-    }
-    if (!values.Mobile) {
-      FormValErrors.Mobile = 'Valid Mobile is required!';
-    } else if (!regexm.test(values.Mobile)) {
-      FormValErrors.Mobile = 'This is not a valid Mobile format!';
-    } else if (values.Mobile.length < 8) {
-      FormValErrors.Mobile = 'Mobile must be more than 8 characters';
-    } else if (values.Mobile.length > 10) {
-      FormValErrors.Mobile = 'Mobile cannot exceed more than 10 characters';
-    }
-
-    if (!values.Email) {
-      FormValErrors.Email = 'Email is required!';
-    } else if (!regex.test(values.Email)) {
-      FormValErrors.Email = 'This is not a valid email format!';
-    }
-    if (!values.City) {
-      FormValErrors.City = 'City Name is required!';
-    }
-    if (!values.Message) {
-      FormValErrors.Message = 'Message is required!';
-    }
-    
-
-    if (!values.Password) {
-      FormValErrors.Password = 'Password is required!';
-    } else if (values.Password.length < 6) {
-      FormValErrors.Password = 'Password must be more than 6 characters';
-    } else if (values.Password.length > 20) {
-      FormValErrors.Password = 'Password cannot exceed more than 20 characters';
-    }
-    if (values.Password !== values.ConfirmPassword) {
-      FormValErrors.ConfirmPassword = 'Please check confirm password ';
-    }
-    return FormValErrors;
-  };
 
   return (
-    //<View style={styles.container}>
-    <ScrollView>
-      {loading ? <Loader /> : null}
-      <View
-        style={(globalstyles.BodyMainOutCon, globalstyles.SearchPaddingBottom)}>
-        <Text style={styles.text}>Prayer Request Form</Text>
-        <View style={(globalstyles.FormRawCon)}>
-        <FormInput
-          labelValue={FullName}
-          onChangeText={setFullName}
-          placeholderText="Full Name"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          type="text"
-          id="FullName"
-          value={FullName}
-          onChange={handleChange}
-          maxLength={30}  
-        />
-        {formErrors.hasOwnProperty('FullName') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.FullName}</Text> }
-        </View>
-        <FormInput
-          labelValue={Email}
-          onChangeText={setEmail}
-          placeholderText="Email"
-          iconType="user"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          type="email"
-          id="Email"
-          value={Email}
-          onChange={handleChange}
-          maxLength={30}  
-        />
-        {formErrors.hasOwnProperty('Email') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.Email}</Text> }
-        <FormInput
-          labelValue={Mobile}
-          onChangeText={userMobile => setMobile(userMobile)}
-          placeholderText="Mobile"
-          iconType="user"
-          keyboardType="number"
-          autoCapitalize="none"
-          autoCorrect={false}
-          maxLength={14}  
-          type="phone"
-          id="Mobile"
-          value={formValues.Mobile}
-          onChange={handleChange}
-        />
-        {formErrors.hasOwnProperty('Mobile') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.Mobile}</Text> }
-        <FormInput
-          labelValue={City}
-          onChangeText={setCity}
-          placeholderText="City"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          maxLength={30}  
-          value={City}
-        />
-        <FormInput
-          labelValue={State}
-          onChangeText={setState}
-          value={State}
-          placeholderText="State"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          maxLength={30}  
-        />
-        <FormInput
-          labelValue={Country}
-          onChangeText={setCountry}
-          value={Country}
-          placeholderText="Country"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <View style={{height: 0}}>
-          <FormInput
-            labelValue="123456"
-            //onChangeText={(userPassword) => setPassword(userPassword)}
-            placeholderText="Password"
-            iconType="user"
-            secureTextEntry={false}
-          />
-        </View>
-        <View style={styles.inputContainerBig}>
-          {/* <View style={styles.iconStyle}>
-        <AntDesign name='user' size={25} color="#666" />
-      </View> */}
-          <TextInput
-            //value={Message}
-            style={styles.inputBig}
-            onChangeText={setMessage}
-            //style={{ height:200, textAlignVertical: 'top',}}
-            numberOfLines={50}
-            multiline={true}
-            placeholder="Message"
-            placeholderTextColor="#666"
-            iconType="user"
-            keyboardType=""
-            autoCapitalize="none"
-            autoCorrect={false}
-            maxLength={300}  
-            //type="phone"
-          id="Message"
-          value={Message}
-          onChange={handleChange}
-          />
-        </View>
-        {formErrors.hasOwnProperty('Message') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.Message}</Text> }
-        {/* 
-      <FormInput
-        labelValue={confirmPassword}
-        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
-        placeholderText="Confirm Password"
-        iconType="lock"
-        secureTextEntry={true}
-      /> */}
-      
-        
-        <FormButton
-          buttonTitle="Submit"
-          //onPress={() => submitform(Email, Password, Fname, FullName,Lname,Mobile,City,State,Country,Message)}
-          //onPress={() => alert('Clicked')}
-          onPress={() => handleSubmit()}
-        />
-        <View style={globalstyles.Divider2}></View>
-        <Text>{errorMessage}</Text>
+    <>
+     <ScrollView>
+      <View style={globalstyles.BodyMainOutCon}>
+      <Text style={styles.text}>We are happy to hear from you.</Text>
+      <View style={styles.container}> 
+			<TextInput 
+				style={styles.input} 
+				placeholder="Full Name"
+				value={FullName} 
+				onChangeText={setFullName} 
+			/> 
+			<TextInput 
+				style={styles.input} 
+				placeholder="Email"
+				value={Email} 
+				onChangeText={setEmail} 
+        keyboardType='email-address'
+			/> 
+      <TextInput 
+				style={styles.input} 
+				placeholder="Mobile"
+				value={Mobile} 
+				onChangeText={setMobile} 
+        keyboardType='phone-pad'
+			/>
+      <TextInput 
+				style={styles.input} 
+				placeholder="City"
+				value={City} 
+				onChangeText={setCity} 
+			/> 
+      <TextInput 
+				style={styles.input} 
+				placeholder="State"
+				value={State} 
+				onChangeText={setState} 
+			/>
+      <TextInput 
+				style={styles.input} 
+				placeholder="Country"
+				value={Country} 
+				onChangeText={setCountry} 
+			/>  
+      <TextInput 
+				style={styles.inputbig} 
+				placeholder="Message"
+				value={Message} 
+				onChangeText={setMessage} 
+        multiline={true}
+			/>  
+      <View style={{height: 0, opacity:0}}>
+			<TextInput 
+				style={styles.input} 
+				placeholder="Password"
+        labelValue="123456" 
+				value={Password} 
+				onChangeText={setPassword} 
+				secureTextEntry={false} 
+			/>
+      </View>
+      {/* Display error messages */} 
+			{Object.values(errors).map((error, index) => ( 
+				<Text key={index} style={styles.error}> 
+					{error} 
+				</Text> 
+			))}
+      {errortext ? <Text style={styles.error}>{errortext}</Text> : null }
+      {Successtext?  <Text style={styles.success}>{Successtext}</Text> : null }
+			<TouchableOpacity 
+				style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]} 
+				disabled={!isFormValid} 
+				onPress={handleSubmit} 
+			>
+			<Text style={styles.buttonText}>Submit</Text> 
+			</TouchableOpacity> 
+			
+		</View> 
+      <View style={globalstyles.Divider5}></View>  
       </View>
     </ScrollView>
+    <View style={globalstyles.Divider2}></View>
+    </>
   );
 };
 
 export default Prayerform;
 
-const styles = StyleSheet.create({
-  inputContainerBig: {
-    display: 'flex',
-    marginTop: 5,
-    marginBottom: 10,
-    width: '100%',
-    height: 100,
-    borderColor: '#ccc',
-    borderRadius: 3,
-    borderWidth: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    backgroundColor: '#fff',
-  },
-  inputBig: {
-    padding: 10,
-    flex: 1,
-    height: 200,
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-    color: '#333',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlignVertical: 'top',
-  },
-  container: {
-    backgroundColor: '#f9fafd',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
+// Styles for the components 
+const styles = StyleSheet.create({ 
+	container: { 
+		flex: 1, 
+		padding: 16, 
+		justifyContent: 'center', 
+	}, 
   text: {
     fontFamily: 'Roboto',
     fontSize: 22,
-    marginBottom: 10,
+    marginTop:20,
+    marginBottom:10,
+    marginLeft:20,
     color: '#051d5f',
   },
-  navButton: {
-    marginTop: 15,
-  },
-  navButtonText: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#2e64e5',
-    fontFamily: 'Lato-Regular',
-  },
-  textPrivate: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginVertical: 35,
-    justifyContent: 'center',
-  },
-  color_textPrivate: {
-    fontSize: 13,
-    fontWeight: '400',
-    fontFamily: 'Lato-Regular',
-    color: 'grey',
-  },
-});
+	input: { 
+		height:45, 
+		borderColor: '#ccc', 
+		borderWidth: 1, 
+		marginBottom: 12, 
+		paddingHorizontal: 10, 
+		borderRadius: 8, 
+		fontSize: 14, 
+	}, 
+  inputbig: { 
+		height: 100, 
+		borderColor: '#ccc', 
+		borderWidth: 1, 
+		marginBottom: 12, 
+		paddingHorizontal: 10, 
+		borderRadius: 8, 
+		fontSize: 16, 
+    textAlignVertical:'top',
+	}, 
+	button: { 
+		backgroundColor: 'green', 
+		borderRadius: 8, 
+		paddingVertical: 10, 
+		alignItems: 'center', 
+		marginTop: 16, 
+		marginBottom: 12, 
+	}, 
+	buttonText: { 
+		color: '#fff', 
+		fontWeight: 'bold', 
+		fontSize: 16, 
+	}, 
+	error: { 
+		color: 'red', 
+		fontSize:10, 
+		marginBottom:5, 
+	}, 
+  success:{
+    color:'green',
+    fontSize:10,
+  }
+}); 

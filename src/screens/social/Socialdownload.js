@@ -38,7 +38,7 @@ function Socialdownload({props, navigation, onPress}) {
   //New function start below
   //New function end here
   let imageURI = route.params.songImgUrl;
-  let imageURIMessage = 'Download MyBibleSong App or Visit our Website www.mybiblesong.com';
+  let imageURIMessage = 'Visit our Website www.mybiblesong.com, Subscribe to our YouTube Channel MyBibleSong, and Share MyBibleSong App';
   let imageURITitle = route.params.posttitle;
   
   
@@ -60,8 +60,8 @@ function Socialdownload({props, navigation, onPress}) {
         var base64Data = `data:image/png;base64,` + base64Data;
         // here's base64 encoded image
         await Share.open({
-    //title: imageURITitle,
-    //message: imageURIMessage,
+          title: imageURITitle,
+          message: imageURIMessage,
     //message:'Download MyBibleSong App or Visit our Website www.mybiblesong.com',
           url: base64Data,
         });
@@ -167,7 +167,7 @@ function Socialdownload({props, navigation, onPress}) {
             </ViewShot>
           </>
         ) : null}
-        {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
+        {/* <Button title="Home" onPress={() => navigation.navigate('Songtab')} /> */}
         <TouchableOpacity onPress={() => Linking.openURL(route.params.weburl)}>
         
         <Text style={{flex:1, display:'flex', textAlign:'right', marginTop:10, marginRight:50, fontWeight:'600'}}>
@@ -230,7 +230,7 @@ function Socialdownload({props, navigation, onPress}) {
           <Text
             style={globalstyles.BtnLoadMoreInnText}
             //onClick={showMoreItems}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('Songtab')}>
             Back to Home ...
           </Text>
         </View>

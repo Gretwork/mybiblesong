@@ -43,7 +43,7 @@ const NotificatioonScreen = ({ props, navigation }) => {
             <Text
               style={[globalstyles.BtnLoadMoreInnText, globalstyles.TextCenter]}
               //onClick={showMoreItems}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => navigation.navigate('Songtab')}>
               Go Home
             </Text>
           </View>

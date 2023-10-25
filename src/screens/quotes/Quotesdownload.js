@@ -19,8 +19,9 @@ import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
 
+
 const url = " - www.mybiblesong.com";
-const titletext = "Download MyBibleSong App or Visit our Website www.mybiblesong.com";
+const titletext = "Visit our Website www.mybiblesong.com, Subscribe to our YouTube Channel MyBibleSong, and Share MyBibleSong App";
 
 function Quotesdownload({props, navigation, onPress}) {
 const route = useRoute();
@@ -29,13 +30,15 @@ const ViewShotRef = useRef();
 const [extrathings, setExtrathings] = useState(true);
 const [mainData, setMainData] = useState(null)
 
+
+
 const verse = mainData?.bibleversestext;
 const book = mainData?.biblebookname;
 const bookchap = mainData?.biblebookchapter;
 const chapno = mainData?.bibleverseno;
 
 
-const message = verse + ' - ' + book +' - '+ bookchap +' : '+ chapno ;
+const message = verse + ' - ' + book +' - '+ bookchap +' : '+ chapno + ' - ' + ' Visit our Website www.mybiblesong.com, Subscribe to our YouTube Channel MyBibleSong, and Share MyBibleSong App' ;
 
 const options = {
   titletext,
@@ -111,7 +114,7 @@ useEffect ( ()=>{
               </View>
             </ViewShot>
            
-        {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
+        {/* <Button title="Home" onPress={() => navigation.navigate('Songtab')} /> */}
         <TouchableOpacity onPress={() => Linking.openURL(route.params.weburl)}>
         
         <Text style={{flex:1, display:'flex', textAlign:'right', marginTop:10, marginRight:70, fontWeight:'600'}}>
@@ -167,7 +170,7 @@ useEffect ( ()=>{
             <Text
               style={[globalstyles.BtnLoadMoreInnText, globalstyles.TextCenter]}
               //onClick={showMoreItems}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => navigation.navigate('Songtab')}>
               Go Home
             </Text>
           </View>

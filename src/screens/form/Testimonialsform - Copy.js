@@ -70,9 +70,9 @@ const Testimonialsform = ({props, navigation}) => {
       //alert( e.message)
     }
     //await auth().signOut()
-    //props.push('/Home')
+    //props.push('/Songtab')
     setTimeout(() => {
-      navigation.navigate('Home')
+      navigation.navigate('Songtab')
      }, 2000)
     
     setErrorMessage ('Thank you for your email, We will get back to your soon.')

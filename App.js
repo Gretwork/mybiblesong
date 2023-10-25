@@ -40,35 +40,34 @@ export default function App() {
     <NavigationContainer options={{headerTitleAlign:'center'}}  linking={linking}>
       <Stack.Navigator>
         <Stack.Screen
-          name="Back"
+          name="Songtab"
           component={NavBottomTab}
-          options={{headerShown: false}}
+          options={{headerShown:false, headerTitle:'Back'}}
         />
         
         <Stack.Screen name="Home" component={Homescreen} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="Songs" component={Songs}></Stack.Screen>
-        <Stack.Screen name="Appinfo" component={AppInfoScreen} options={{headerTitleAlign:'center',headerTitle :'Inside My Bible Song App'}}></Stack.Screen>
-        <Stack.Screen name="Vanchan" component={Vanchanlisting} options={{headerTitleAlign:'center'}}></Stack.Screen>
-        <Stack.Screen name="Details" component={SongDetail} options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Socialdownload" component={Socialdownload} options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Festivaldownload" component={Festivaldownload} options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Quotesdownload" component={Quotesdownload} options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Quotesslider" component={Quotesslider} options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
+        <Stack.Screen name="Appinfo" component={AppInfoScreen} options={{headerTitleAlign:'center',headerTitle :'Inside My Bible Song App', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Vanchan" component={Vanchanlisting} options={{headerTitleAlign:'center', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Details" component={SongDetail} options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Socialdownload" component={Socialdownload} options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Festivaldownload" component={Festivaldownload} options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Quotesdownload" component={Quotesdownload} options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Quotesslider" component={Quotesslider} options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
         
-        <Stack.Screen name="Login"  component={LoginWithPhoneScreen}  options={{headerTitleAlign:'center'}}></Stack.Screen>
-        <Stack.Screen name="Signup" component={SignupScreen}  options={{headerTitleAlign:'center'}}></Stack.Screen>
-        <Stack.Screen name="Quiz" component={Quizlisting}  options={{headerTitleAlign:'center', headerTitle :'Bible Quiz'}}></Stack.Screen>
-        <Stack.Screen name="Prayer" component={Prayerlisting}  options={{headerTitleAlign:'center'}}></Stack.Screen>
-        <Stack.Screen name="Quotes" component={Sociallisting}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Testimonials" component={Testimoniallisting}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Verses" component={Quoteslisting}  options={{headerTitleAlign:'center',headerTitle :'Bible Verses'}}></Stack.Screen>
-        <Stack.Screen name="Contact" component={Contactform}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="TestimonyForm" component={Testimonialsform}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="PrayerForm" component={Prayerform}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="EditProfile" component={EditProfileScreen}  options={{headerTitleAlign:'center',headerTitle :'Edit Profile'}}></Stack.Screen>
-        <Stack.Screen name="VideoPlayer" component={VideoPlayer}  options={{headerTitleAlign:'center', headerTitle :'My Bible Song'}}></Stack.Screen>
-        <Stack.Screen name="Today" component={NotificatioonScreen} options={{headerTitleAlign:'center'}}/>
-        
+        <Stack.Screen name="Login"  component={LoginWithPhoneScreen}  options={{headerTitleAlign:'center', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Signup" component={SignupScreen}  options={{headerTitleAlign:'center', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Quiz" component={Quizlisting}  options={{headerTitleAlign:'center', headerTitle :'Bible Quiz', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Prayer" component={Prayerlisting}  options={{headerTitleAlign:'center', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Quotes" component={Sociallisting}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Testimonials" component={Testimoniallisting}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Verses" component={Quoteslisting}  options={{headerTitleAlign:'center',headerTitle :'Bible Verses', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Contact" component={Contactform}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="TestimonyForm" component={Testimonialsform}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="PrayerForm" component={Prayerform}  options={{headerTitleAlign:'center',headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="EditProfile" component={EditProfileScreen}  options={{headerTitleAlign:'center',headerTitle :'Edit Profile', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="VideoPlayer" component={VideoPlayer}  options={{headerTitleAlign:'center', headerTitle :'My Bible Song', headerBackTitleVisible:false }}></Stack.Screen>
+        <Stack.Screen name="Today" component={NotificatioonScreen} options={{headerTitleAlign:'center', headerBackTitleVisible:false }}/>
         </Stack.Navigator>
         
     </NavigationContainer>

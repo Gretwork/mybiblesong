@@ -129,7 +129,7 @@ function downloadImage () {
             </ViewShot>
           </>
         ) : null}
-        {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
+        {/* <Button title="Home" onPress={() => navigation.navigate('Songtab')} /> */}
         
         <TouchableOpacity style={globalstyles.BtnConDetail1}>
           <Text style={globalstyles.BtnConDetailText}>
@@ -175,7 +175,7 @@ function downloadImage () {
           <Text
             style={globalstyles.BtnLoadMoreInnText}
             //onClick={showMoreItems}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('Songtab')}>
             Back to Home ...
           </Text>
         </View>

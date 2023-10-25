@@ -96,7 +96,7 @@ const Contactform = ({props, navigation}) => {
     //await auth().signOut()
     //props.push('/Home')
     setTimeout(() => {
-      navigation.navigate('Home');
+      navigation.navigate('Songtab');
     }, 2000);
 
     setErrorMessage('Thank you for your email, We will get back to your soon.');

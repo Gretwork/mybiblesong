@@ -42,7 +42,7 @@ const QuotesDetails = ({ props, navigation }) => {
           <Text
             style={globalstyles.BtnLoadMoreInnText}
             //onClick={showMoreItems}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('Songtab')}>
             Go Back to Home
           </Text>
         </View>

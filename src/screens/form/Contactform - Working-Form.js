@@ -100,7 +100,7 @@ const Contactform = ({props, navigation}) => {
       //alert( e.message)
     }
     //await auth().signOut()
-    //props.push('/Home')
+    //props.push('/Songtab')
     setTimeout(() => {
       navigation.navigate('Songtab');
     }, 2000);
@@ -227,6 +227,11 @@ const Contactform = ({props, navigation}) => {
       isValid = false;
     }
 
+    if (!inputs.message) {
+      handleError('Please input message', 'message');
+      isValid = false;
+    }
+
     if (!inputs.password) {
       handleError('Please input password', 'password');
       isValid = false;
@@ -276,16 +281,16 @@ const Contactform = ({props, navigation}) => {
           <Input
             onChangeText={text => handleOnchange(text, 'email')}
             onFocus={() => handleError(null, 'email')}
-            iconName="email-outline"
+            iconName="ios-globe-outline"
             label="Email"
-            placeholder="Enter your email address"
+            placeholder="Enter your email address 1"
             error={errors.email}
           />
 
           <Input
             onChangeText={text => handleOnchange(text, 'fullname')}
             onFocus={() => handleError(null, 'fullname')}
-            iconName="account-outline"
+            iconName="ios-globe-outline"
             label="Full Name"
             placeholder="Enter your full name"
             error={errors.fullname}
@@ -295,12 +300,37 @@ const Contactform = ({props, navigation}) => {
             keyboardType="numeric"
             onChangeText={text => handleOnchange(text, 'phone')}
             onFocus={() => handleError(null, 'phone')}
-            iconName="phone-outline"
+            iconName="ios-globe-outline"
             label="Phone Number"
             placeholder="Enter your phone no"
             error={errors.phone}
+             
           />
-          <Input
+           <Input 
+            onChangeText={text => handleOnchange(text, 'address')}
+            //onFocus={() => handleError(null, 'phone')}
+            iconName="ios-globe-outline"
+            label="Address"
+            placeholder="Enter your address"
+            //error={errors.phone}
+            multiline={true}
+            numberOfLines = {4} 
+            maxLength={400}  
+            //style={{ height:200, textAlignVertical: 'center',}}
+          />
+          <Input 
+            onChangeText={text => handleOnchange(text, 'message')}
+            onFocus={() => handleError(null, 'message')}
+            iconName="ios-globe-outline"
+            label="Message"
+            placeholder="Enter your message"
+            error={errors.phone}
+            multiline={true}
+            numberOfLines = {4} 
+            maxLength={400}  
+            //style={{ height:200, textAlignVertical: 'center',}}
+          />
+          {/* <Input
             onChangeText={text => handleOnchange(text, 'password')}
             onFocus={() => handleError(null, 'password')}
             iconName="lock-outline"
@@ -308,104 +338,26 @@ const Contactform = ({props, navigation}) => {
             placeholder="Enter your password"
             error={errors.password}
             password
-          />
-          <Button title="Register" onPress={validates} />
+          /> */}
+
+
+
+          {/* <Button title="Register" onPress={validates} /> */}
            
         </View>
 
-        <View style={(globalstyles.FormRawCon)}>
-        <FormInput
-          labelValue={FullName} 
-          placeholderText="Full Name"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          type="text"
-          id="FullName" 
-          onChange={handleChange}
-        onChangeText={setFullName}
-        value={FullName}
-        maxLength={30}  
-        />
-        {formErrors.hasOwnProperty('FullName') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.FullName}</Text> }
-        </View>
-        <FormInput
-          labelValue={Email}
-          onChangeText={setEmail}
-          placeholderText="Email"
-          iconType="user"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          type="email"
-          id="Email"
-          value={Email}
-          onChange={handleChange}
-          maxLength={30}  
-        />
-        {formErrors.hasOwnProperty('Email') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.Email}</Text> }
-        <FormInput
-          labelValue={Mobile}
-          onChangeText={setMobile}
-          placeholderText="Mobile"
-          iconType="user"
-          keyboardType="number"
-          autoCapitalize="none"
-          autoCorrect={false}
-          maxLength={14}  
-          type="phone"
-          id="Mobile"
-          value={Mobile}
-          onChange={handleChange}
-        />
-        {formErrors.hasOwnProperty('Mobile') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.Mobile}</Text> }
-        <FormInput
-          labelValue={City}
-          onChangeText={setCity}
-          placeholderText="City"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={City}
-          maxLength={30}  
-        />
-        <FormInput
-          labelValue={State}
-          onChangeText={setState}
-          placeholderText="State"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={State}
-          maxLength={30}  
-        />
-        <FormInput
-          labelValue={Country}
-          onChangeText={setCountry}
-          placeholderText="Country"
-          iconType="user"
-          keyboardType=""
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={Country}
-          maxLength={30}  
-        />
-        <View style={{height: 0}}>
+           
+           
+        <View style={{height: 0, opacity:0}}>
           <FormInput
-            labelValue="123456"
-            //onChangeText={(userPassword) => setPassword(userPassword)}
+            labelValue="123456" 
             placeholderText="Password"
             iconType="user"
             secureTextEntry={false}
           />
         </View>
-        <View style={styles.inputContainerBig}>
-          {/* <View style={styles.iconStyle}>
-        <AntDesign name='user' size={25} color="#666" />
-      </View> */}
+        {/* <View style={styles.inputContainerBig}>
+           
           <TextInput
             //value={Message}
             style={styles.inputBig}
@@ -424,23 +376,16 @@ const Contactform = ({props, navigation}) => {
           value={Message}
           onChange={handleChange}
           />
-        </View>
-        {formErrors.hasOwnProperty('Message') && <Text style={(globalstyles.FormErrorMessage)}>{formErrors.Message}</Text> }
-        {/* 
-      <FormInput
-        labelValue={confirmPassword}
-        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
-        placeholderText="Confirm Password"
-        iconType="lock"
-        secureTextEntry={true}
-      /> */}
+        </View>  */}
+         
       
         
         <FormButton
           buttonTitle="Submit"
           //onPress={() => submitform(Email, Password, Fname, FullName,Lname,Mobile,City,State,Country,Message)}
           //onPress={() => alert('Clicked')}
-          onPress={() => handleSubmit()}
+          //onPress={() => handleSubmit()}
+          onPress={validates}
         />
         <View style={globalstyles.Divider2}></View>
         <Text>{errorMessage}</Text>

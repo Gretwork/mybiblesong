@@ -107,7 +107,7 @@ function Songs({props, navigation}) {
       {/* <TextInput value={code} onChangeText={text => setCode(text)} />
           <View style={globalstyles.SongsBannerCon}></View>
       */}
-      <Songbannerbigone style={globalstyles.SongsBannerCon} />
+      <Songbannerbigone style={globalstyles.SongsBannerCon} />      
       <View style={globalstyles.SongsListTabMainCon}>
         <View style={globalstyles.SongsListTabInnCon}>
           <Text style={globalstyles.SongsListTabMenuCon}>All</Text>
@@ -165,6 +165,7 @@ function Songs({props, navigation}) {
         
         <View style={globalstyles.Divider1}></View>
       </View>
+      
     </>
   );
 }

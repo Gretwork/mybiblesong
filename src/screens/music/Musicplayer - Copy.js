@@ -179,7 +179,7 @@ const Musicplayer = ({props, navigation, buttonTitle, ...rest}) => {
           <View style={globalstyles.Divider1}></View>
           {/* <BtnComingSoon />
           <View style={globalstyles.Divider1}></View> */}
-          {/* <BtnBackToHome buttonTitle="Go to Home" onPress={() => navigation.navigate('Home')}/>   */}
+          {/* <BtnBackToHome buttonTitle="Go to Home" onPress={() => navigation.navigate('Songtab')}/>   */}
         </View>
         </>
         :
