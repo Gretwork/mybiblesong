@@ -86,7 +86,7 @@ export const globalstyles = StyleSheet.create({
     /*display:'flex', alignItems:'center',  justifyContent:'center', overflow:'hidden',
     width: windowWidth / 1.078, margin:10, resizeMode:'contain', aspectRatio:5/3, borderRadius:10,
     */
-    marginLeft:10, marginVertical:10, width: windowWidth / 1.020, 
+    marginLeft:10, marginVertical:10, width: windowWidth / 1.060, 
     //height: windowHeight /3.2, 
     //height:Math.round(dimensions.width * 9/16 ), 
     aspectRatio:5/3,

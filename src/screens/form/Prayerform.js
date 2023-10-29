@@ -107,7 +107,7 @@ const Prayerform = ({props, navigation, buttonTitle, ...rest}) => {
           errors.City = 'City is required.'; 
         } 
         if (!State) { 
-          errors.State = 'State is required.'; 
+          errors.State = 'State/Province is required.'; 
         } 
         if (!Country) { 
           errors.Country = 'Country is required.'; 
@@ -170,7 +170,7 @@ const Prayerform = ({props, navigation, buttonTitle, ...rest}) => {
 			/> 
       <TextInput 
 				style={styles.input} 
-				placeholder="State"
+				placeholder="State/Province"
 				value={State} 
 				onChangeText={setState} 
 			/>
