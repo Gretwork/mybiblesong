@@ -29,13 +29,16 @@ function Songs({props, navigation}) {
   // Fetch the required data using the get() method
 
   const getAssets = async () => {
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     setLoading (true)
     try {
       const list = [];
       //console.log("Break");
       firestore()
-        .collection('songbooks')
+        .collection('songbooks')        
         .orderBy('timestamp', 'desc')
+        .where("timestamp", "<=", todaysDate)
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
@@ -85,6 +88,14 @@ function Songs({props, navigation}) {
     //getAssetsSearch()
   }, [searchinput]);
   
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    //set isRefreshing to true
+    getAssets();
+    // and set isRefreshing to false at the end of your callApiMethod()
+  }
+
   const DATA = [];
 
   const getItem = (data, index) => ({
@@ -124,6 +135,8 @@ function Songs({props, navigation}) {
         data={filteredDataSource}
         initialNumToRender={4}
         ListEmptyComponent={EmptyList}
+        onRefresh={onRefresh}
+        refreshing={isRefreshing}
         //ItemSeparatorComponent={EmptyList}
         keyExtractor={item => item.key}
         getItemCount={data=>data.length}

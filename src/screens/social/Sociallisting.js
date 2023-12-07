@@ -10,6 +10,7 @@ import BtnRadioBtn from '../../components/BtnRadioButton';
 import {useRoute} from '@react-navigation/native';
 //import { ImageZoom } from '@likashefqet/react-native-image-zoom';
 import ImageZoomEffect from '../../components/ImageZoomEffect';
+import defaultimage from '../../assets/demoimg.png';
 
 function Sociallisting({props, navigation}) {
   const route = useRoute();
@@ -21,9 +22,17 @@ function Sociallisting({props, navigation}) {
   const [lastloded, setLastloded] = useState(null);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
   // Get post data
   const getAssets = async () => {
     const field = 'timestamp';
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       setLoading(true);
       const list = [];
@@ -54,14 +63,17 @@ function Sociallisting({props, navigation}) {
   const getAssetsMore = async () => {
     const field = 'timestamp';
     //console.log('222 Number', lastloded);
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       const list = [];
       firestore()
         .collection('biblequotes')
         .orderBy(field, 'desc')
-        .where('language', '==', languagechecked)
-        .startAfter(lastloded[field])
         .limit(pageloadlimit)
+        .where('language', '==', languagechecked)
+        .where("timestamp", "<=", todaysDate)
+        .startAfter(lastloded[field])
         .get()
         .then(function (querySnapshot) {
           const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -89,6 +101,14 @@ function Sociallisting({props, navigation}) {
     setAllLoaded(false);
     getAssets();
   }, [languagechecked]);
+
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    //set isRefreshing to true
+    getAssets();
+    // and set isRefreshing to false at the end of your callApiMethod()
+  }
 
   const DATA = [];
 
@@ -153,6 +173,8 @@ function Sociallisting({props, navigation}) {
             ListEmptyComponent={EmptyList}
             onEndReached={getAssetsMore}
             onEndReachedThreshold={0}
+            onRefresh={onRefresh}
+            refreshing={isRefreshing}
             keyExtractor={item => item.key}
             getItemCount={data => data.length}
             ListFooterComponent={FooterList}
@@ -183,9 +205,21 @@ function Sociallisting({props, navigation}) {
                               //     globalstyles.ImageBottomBorderNone)
                               //   }
                               // />*/}
-                             
+                             {loading ? 
+                            
+                              <Image
+                                source={defaultimage}
+                                styleclass={(globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone)}
+                              />
+                            
+                              :
                               <ImageZoomEffect   imgurl={{uri: item.songdata.biblequotesimage}}  
-                              styleclass={(globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone)} />
+                              styleclass={(globalstyles.HorScrollBoxBibleVersImgInn, globalstyles.ImageBottomBorderNone)} 
+                              //onLoad={handleImageLoad}
+                              
+                              />
+                            }
+                              
 
                               {/* <Text style={( globalstyles.Downloadimgbtn)}>Download</Text> */}
                               <View style={globalstyles.Downloadimgbtn}>

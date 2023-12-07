@@ -15,10 +15,17 @@ function Socialslider({props, navigation}) {
   
 
   const getAssets = async () =>{
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
        const list = [];
        //console.log("Break");
-       firestore().collection("biblequotes").orderBy('timestamp', 'desc').limit(4).get()
+       firestore()
+       .collection("biblequotes")       
+       .orderBy('timestamp', 'desc')
+       .limit(4)
+       .where("timestamp", "<=", todaysDate)
+       .get()
        .then(function(querySnapshot){
           querySnapshot.forEach(function(doc){
              list.push(doc.data());

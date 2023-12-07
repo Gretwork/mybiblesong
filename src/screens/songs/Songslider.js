@@ -11,10 +11,17 @@ function Songslider({props, navigation}) {
   
 
   const getAssets = async () =>{
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
        const list = [];
        //console.log("Break");
-       firestore().collection("songbanner").orderBy('timestamp', 'desc').limit(6).get()
+       firestore()
+       .collection("songbanner")       
+       .orderBy('timestamp', 'desc')
+       .limit(6)
+       .where("timestamp", "<=", todaysDate)
+       .get()
        .then(function(querySnapshot){
           querySnapshot.forEach(function(doc){
              list.push(doc.data());

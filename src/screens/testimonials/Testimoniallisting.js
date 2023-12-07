@@ -25,11 +25,16 @@ function Testimoniallisting({props, navigation}) {
 
   const getAssets = async () => {
     setLoading(true)
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       const list = [];
       //console.log("Break");
       firestore()
         .collection('testimonials')
+        .orderBy('timestamp', 'desc')
+        .limit(6)
+        .where("timestamp", "<=", todaysDate)
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {

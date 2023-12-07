@@ -23,14 +23,17 @@ function Vanchanlisting({props, navigation}) {
   // Get post data
   const getAssets = async () => {
     const field = 'timestamp';
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       setLoading(true);
       const list = [];
       firestore()
         .collection('vanchan')
         .orderBy(field, 'asc')
-        .where('language', '==', languagechecked)
         .limit(pageloadlimit)
+        .where('language', '==', languagechecked)
+        .where("timestamp", "<=", todaysDate)                   
         .get()
         .then(function (querySnapshot) {
           const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];

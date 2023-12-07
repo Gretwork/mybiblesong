@@ -23,14 +23,17 @@ function Musicplayer ({props, navigation}) {
   // Get post data
   const getAssets = async () => {
     const field = 'timestamp';
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       setLoading(true);
       const list = [];
       firestore()
         .collection('musicbook')
         .orderBy(field, 'desc')
-        .where('songlanguage', '==', languagechecked)
         .limit(pageloadlimit)
+        .where('songlanguage', '==', languagechecked)
+        .where("timestamp", "<=", todaysDate)
         .get()
         .then(function (querySnapshot) {
           const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -51,14 +54,17 @@ function Musicplayer ({props, navigation}) {
   const getAssetsMore = async () => {
     const field = 'timestamp';
     //console.log('222 Number', lastloded);
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       const list = [];
       firestore()
         .collection('musicbook')
         .orderBy(field, 'desc')
-        .where('songlanguage', '==', languagechecked)
-        .startAfter(lastloded[field])
         .limit(pageloadlimit)
+        .where('songlanguage', '==', languagechecked)
+        .where("timestamp", "<=", todaysDate)
+        .startAfter(lastloded[field])
         .get()
         .then(function (querySnapshot) {
           const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];

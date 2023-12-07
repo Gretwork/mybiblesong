@@ -37,14 +37,17 @@ function Quoteslisting({props, navigation, onPress}) {
   // Get post data
   const getAssets = async () => {
     const field = 'timestamp';
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       setLoading(true);
       const list = [];
       firestore()
         .collection('bibleverses')
         .orderBy(field, 'desc')
-        .where('language', '==', languagechecked)
         .limit(pageloadlimit)
+        .where('language', '==', languagechecked)
+        .where("timestamp", "<=", todaysDate)
         .get()
         .then(function (querySnapshot) {
           const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -64,14 +67,17 @@ function Quoteslisting({props, navigation, onPress}) {
   const getAssetsMore = async () => {
     const field = 'timestamp';
     //console.log('222 Number', lastloded);
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
       const list = [];
       firestore()
         .collection('bibleverses')
         .orderBy(field, 'desc')
+        .limit(pageloadlimit)
+        .where("timestamp", "<=", todaysDate)
         .where('language', '==', languagechecked)
         .startAfter(lastloded[field])
-        .limit(pageloadlimit)
         .get()
         .then(function (querySnapshot) {
           const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];

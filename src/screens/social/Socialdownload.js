@@ -21,7 +21,7 @@ import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
 import ImageZoomEffect from '../../components/ImageZoomEffect';
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
-
+import defaultimage from '../../assets/demoimg.png';
 import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 
@@ -38,7 +38,8 @@ function Socialdownload({props, navigation, onPress}) {
   //New function start below
   //New function end here
   let imageURI = route.params.songImgUrl;
-  let imageURIMessage = 'Visit our Website www.mybiblesong.com, Subscribe to our YouTube Channel MyBibleSong, and Share MyBibleSong App';
+  //let imageURIMessage = 'Visit our Website www.mybiblesong.com, Subscribe to our YouTube Channel MyBibleSong, and Share MyBibleSong App';
+  let imageURIMessage = 'Visit our Website mybiblesong';
   let imageURITitle = route.params.posttitle;
   
   
@@ -61,7 +62,7 @@ function Socialdownload({props, navigation, onPress}) {
         // here's base64 encoded image
         await Share.open({
           title: imageURITitle,
-          message: imageURIMessage,
+          message: url.imageURIMessage,
     //message:'Download MyBibleSong App or Visit our Website www.mybiblesong.com',
           url: base64Data,
         });

@@ -16,11 +16,15 @@ function Quotesslider({props, navigation}) {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
 
   const getAssets = async () =>{
+    const todaysDate = new Date();
+    todaysDate.setUTCHours.toLocaleString();
     try {
        const list = [];
        //console.log("Break");
-       firestore().collection("bibleverses")
-       .orderBy('timestamp', 'desc').limit(4)
+       firestore().collection("bibleverses")       
+       .orderBy('timestamp', 'desc')
+       .limit(4)
+       .where('timestamp', '<=', todaysDate)
        .get()
        .then(function(querySnapshot){
           querySnapshot.forEach(function(doc){
